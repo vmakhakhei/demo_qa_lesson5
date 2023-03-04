@@ -1,9 +1,8 @@
 from selene import browser, be, by, have
 
 
-
 def test_fill_fields(browser_setup):
-#variables
+    # variables
     first_name = 'Uladzislau'
     last_name = 'Makhakhei'
     email = 'vladqaguru@gmail.com'
@@ -18,10 +17,10 @@ def test_fill_fields(browser_setup):
     month = '6'  # month of birthday-1
     year = '1994'  # year of birthday
     day = '03'  # day of birthday
-    FILE = 'C:\\Users\\Anastasya\\PycharmProjects\\demo_qa_lesson5\\resources\\picture.jpg'  # path to file
+    avatar = 'C:\\Users\\Anastasya\\PycharmProjects\\demo_qa_lesson5\\resources\\picture.jpg'  # path to file
     current_adress = 'Minsk'
 
-#Tests
+    # Tests
     browser.open('/automation-practice-form')
     browser.element("#firstName").should(be.blank).type(first_name)  # fill First name field
     browser.element("#lastName").should(be.blank).type(last_name)  # fill Last name field
@@ -37,7 +36,7 @@ def test_fill_fields(browser_setup):
     # select subjects
     browser.element('#hobbiesWrapper label[for="hobbies-checkbox-3"]').click()
     # select hobbies
-    browser.element(by.id('uploadPicture')).send_keys(FILE)  # upload file
+    browser.element(by.id('uploadPicture')).send_keys(avatar)  # upload file
     browser.element('#currentAddress').should(be.blank).type(current_adress)  # fill adress
     browser.element('#react-select-3-input').should(be.blank).type('NCR').press_enter()  # select state
     browser.element('#react-select-4-input').should(be.blank).type('Noida').press_enter()  # select city
