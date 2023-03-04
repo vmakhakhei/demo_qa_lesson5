@@ -1,26 +1,27 @@
 from selene import browser, be, by, have
 
-first_name = 'Uladzislau'
-last_name = 'Makhakhei'
-email = 'vladqaguru@gmail.com'
-gender = '1'  # 1-male, 2-female, 3-other
-
-if gender == '1':
-    gender_print = 'Male'
-elif gender == '2':
-    gender_print = 'Female'
-elif gender == '3':
-    gender_print = 'Other'
-
-phone_number = '2055551215'
-month = '6'  # month of birthday-1
-year = '1994'  # year of birthday
-day = '03'  # day of birthday
-FILE = 'C:\\Users\\Anastasya\\PycharmProjects\\demo_qa_lesson5\\resources\\picture.jpg'  # path to file
-current_adress = 'Minsk'
 
 
 def test_fill_fields(browser_setup):
+#variables
+    first_name = 'Uladzislau'
+    last_name = 'Makhakhei'
+    email = 'vladqaguru@gmail.com'
+    gender = '1'  # 1-male, 2-female, 3-other
+    if gender == '1':
+        gender_print = 'Male'
+    elif gender == '2':
+        gender_print = 'Female'
+    elif gender == '3':
+        gender_print = 'Other'
+    phone_number = '2055551215'
+    month = '6'  # month of birthday-1
+    year = '1994'  # year of birthday
+    day = '03'  # day of birthday
+    FILE = 'C:\\Users\\Anastasya\\PycharmProjects\\demo_qa_lesson5\\resources\\picture.jpg'  # path to file
+    current_adress = 'Minsk'
+
+#Tests
     browser.open('/automation-practice-form')
     browser.element("#firstName").should(be.blank).type(first_name)  # fill First name field
     browser.element("#lastName").should(be.blank).type(last_name)  # fill Last name field

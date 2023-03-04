@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e12b339c-3a14-4336-abe9-02f1d6617b7e" name="Changes" comment="Final Commit" />
+    <list default="true" id="e12b339c-3a14-4336-abe9-02f1d6617b7e" name="Changes" comment="Final Commit">
+      <change beforePath="$PROJECT_DIR$/test_demo_qa.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_demo_qa.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -174,8 +176,25 @@
       <option name="project" value="LOCAL" />
       <updated>1677934305973</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Final Commit">
+      <created>1677935717936</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1677935717936</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Final Commit">
+      <created>1677935822615</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1677935822615</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="com.intellij.fileTypeFactory" implementationName="requirements.txt" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
