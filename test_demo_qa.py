@@ -21,6 +21,7 @@ current_adress = 'Minsk'
 
 
 def test_fill_fields(browser_setup):
+    browser.open('/automation-practice-form')
     browser.element("#firstName").should(be.blank).type(first_name)  # fill First name field
     browser.element("#lastName").should(be.blank).type(last_name)  # fill Last name field
     browser.element("#userEmail").should(be.blank).type(email)  # fill email field
