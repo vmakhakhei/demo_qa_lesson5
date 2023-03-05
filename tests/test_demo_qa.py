@@ -30,7 +30,7 @@ def test_fill_fields(browser_setup):
     # select subjects
     browser.element('#hobbiesWrapper label[for="hobbies-checkbox-3"]').click()
     # select hobbies
-    browser.element(by.id('uploadPicture')).send_keys(os.getcwd() + '\\resources\\picture.jpg')  # upload file
+    browser.element(by.id('uploadPicture')).send_keys(avatar)  # upload file
     browser.element('#currentAddress').should(be.blank).type(current_adress)  # fill adress
     browser.element('#react-select-3-input').should(be.blank).type('NCR').press_enter()  # select state
     browser.element('#react-select-4-input').should(be.blank).type('Noida').press_enter()  # select city
