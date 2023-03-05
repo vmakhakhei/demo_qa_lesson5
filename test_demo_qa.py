@@ -7,19 +7,12 @@ def test_fill_fields(browser_setup):
     last_name = 'Makhakhei'
     email = 'vladqaguru@gmail.com'
     gender = '1'  # 1-male, 2-female, 3-other
-    if gender == '1':
-        gender_print = 'Male'
-    elif gender == '2':
-        gender_print = 'Female'
-    elif gender == '3':
-        gender_print = 'Other'
     phone_number = '2055551215'
     month = '6'  # month of birthday-1
     year = '1994'  # year of birthday
     day = '03'  # day of birthday
     avatar = 'C:\\Users\\Anastasya\\PycharmProjects\\demo_qa_lesson5\\resources\\picture.jpg'  # path to file
     current_adress = 'Minsk'
-
     # Tests
     browser.open('/automation-practice-form')
     browser.element("#firstName").should(be.blank).type(first_name)  # fill First name field
@@ -45,7 +38,7 @@ def test_fill_fields(browser_setup):
     browser.all('.table-responsive tbody tr').should(have.size(10))
     browser.element('tr:nth-child(1) td:nth-child(2)').should(have.text(f'{first_name} {last_name}'))
     browser.element('tr:nth-child(2) td:nth-child(2)').should(have.text(email))
-    browser.element('tr:nth-child(3) td:nth-child(2)').should(have.text(gender_print))
+    browser.element('tr:nth-child(3) td:nth-child(2)').should(have.text('Male'))
     browser.element('tr:nth-child(4) td:nth-child(2)').should(have.text(phone_number))
     browser.element('tr:nth-child(5) td:nth-child(2)').should(have.text('03 July,1994'))
     browser.element('tr:nth-child(6) td:nth-child(2)').should(have.text('Maths'))
