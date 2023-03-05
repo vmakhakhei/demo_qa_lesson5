@@ -129,4 +129,4 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
-__init__.py
+tests/__init__.py
