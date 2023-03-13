@@ -16,12 +16,14 @@ def test_fill_fields(browser_setup):
     current_adress = 'Minsk'
     # Tests
     browser.open('/automation-practice-form')
+
     browser.element("#firstName").should(be.blank).type(first_name)  # fill First name field
     browser.element("#lastName").should(be.blank).type(last_name)  # fill Last name field
     browser.element("#userEmail").should(be.blank).type(email)  # fill email field
     browser.element(f'.custom-control label[for="gender-radio-{gender}"]').click()  # choose gender
     browser.element("#userNumber").should(be.blank).type(phone_number)  # fill number field
     browser.element('#dateOfBirthInput').click()  # open calendar
+
     browser.element(f'''.react-datepicker__month-select option[value="{month}"]''').click()  # choose month
     browser.element(f'''.react-datepicker__year-select option[value="{year}"]''').click()  # choose year
     browser.element(f'''.react-datepicker__day--0{day}''').click()
@@ -30,11 +32,14 @@ def test_fill_fields(browser_setup):
     # select subjects
     browser.element('#hobbiesWrapper label[for="hobbies-checkbox-3"]').click()
     # select hobbies
+
     browser.element(by.id('uploadPicture')).send_keys(avatar)  # upload file
+
     browser.element('#currentAddress').should(be.blank).type(current_adress)  # fill adress
     browser.element('#react-select-3-input').should(be.blank).type('NCR').press_enter()  # select state
     browser.element('#react-select-4-input').should(be.blank).type('Noida').press_enter()  # select city
     browser.execute_script("document.querySelector('#submit').click()")  # click the button submit
+
     # check_inputed_data
     browser.all('.table-responsive tbody tr').should(have.size(10))
     browser.element('tr:nth-child(1) td:nth-child(2)').should(have.text(f'{first_name} {last_name}'))
