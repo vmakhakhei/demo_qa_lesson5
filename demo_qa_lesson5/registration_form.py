@@ -1,6 +1,21 @@
 from selene import browser, be, have, by
 import os
 
+months = ['January',
+         'February',
+         'March',
+         'April',
+         'May',
+         'June',
+         'July',
+         'August',
+         'September',
+         'October',
+         'November',
+         'December'
+          ]
+
+
 class RegistrationPage:
     def __init__(self):
         self.first_name = browser.element("#firstName")
@@ -18,7 +33,7 @@ class RegistrationPage:
         self.hobby_reading = browser.element('#hobbiesWrapper label[for="hobbies-checkbox-2"]')
         self.hobby_music = browser.element('#hobbiesWrapper label[for="hobbies-checkbox-3"]')
         self.upload_picture = browser.element(by.id('uploadPicture'))
-
+        self.open_calendar = browser.element('#dateOfBirthInput')
 
     def open(self):
         browser.open('/automation-practice-form')
@@ -33,15 +48,17 @@ class RegistrationPage:
         browser.element("#userEmail").should(be.blank).type(email)
 
     def fill_date_of_birth(self, day, month, year):
-        browser.element('#dateOfBirthInput').click()
+        self.open_calendar.click()
         browser.element(f".react-datepicker__month-select").type(month)
+        assert month.lower() in months, "Введено некорректное значение"
         browser.element(f'''.react-datepicker__year-select option[value="{year}"]''').click()
+        assert len(str(day)) == 2, "Введите дату двузначиным значением"
         browser.element(f'''.react-datepicker__day--0{day}''').click()
 
     def assert_registred_user_info(self, name, email, gender, phone, date, subjects, hobbies, avatar, address,
                                    city_option):
         browser.element('.table').all('td').even.should(
-            have.exact_texts(name, email, gender, phone, date, subjects, hobbies, avatar, address, city_option,))
+            have.exact_texts(name, email, gender, phone, date, subjects, hobbies, avatar, address, city_option, ))
 
     def gender(self, gender):
         if gender.lower() == 'male':
@@ -77,10 +94,10 @@ class RegistrationPage:
 
     def select_hobbies(self, hobbies):
         if hobbies.lower() == 'music':
-            self.hobbie_music.click()
+            self.hobby_music.click()
         elif hobbies.lower() == 'reading':
-            self.hobbie_reading.click()
+            self.hobby_reading.click()
         elif hobbies.lower() == 'sports':
-            self.hobbie_sports.click()
+            self.hobby_sports.click()
         else:
             raise AttributeError
