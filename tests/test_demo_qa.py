@@ -16,12 +16,9 @@ def test_fill_fields(browser_setup):
     registration_page.fill_date_of_birth('03', 'July', '1994')
     registration_page.gender('Male')
     registration_page.type_phone('2055551215')
-
     registration_page.select_subjects('Maths')
     registration_page.select_hobbies('Music')
-
-    registration_page.upload_picture('\\resources\\picture.jpg')
-
+    registration_page.upload_picture('picture.jpg')
     registration_page.fill_current_address('Minsk')
     registration_page.select_state('NCR')
     registration_page.select_city('Noida')

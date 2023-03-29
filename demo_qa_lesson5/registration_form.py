@@ -50,7 +50,7 @@ class RegistrationPage:
     def fill_date_of_birth(self, day, month, year):
         self.open_calendar.click()
         browser.element(f".react-datepicker__month-select").type(month)
-        assert month.lower() in months, "Введено некорректное значение"
+        assert month.title() in months, "Введено некорректное значение"
         browser.element(f'''.react-datepicker__year-select option[value="{year}"]''').click()
         assert len(str(day)) == 2, "Введите дату двузначиным значением"
         browser.element(f'''.react-datepicker__day--0{day}''').click()
@@ -87,7 +87,7 @@ class RegistrationPage:
         self.city.should(be.blank).type(city).press_enter()
 
     def upload_picture(self, picture_path):
-        self.upload_picture.send_keys(os.getcwd() + picture_path)
+        self.upload_picture.type(os.getcwd() + f'/tests/resourses/{picture_path}')
 
     def select_subjects(self, subjects):
         self.subjects.should(be.blank).type(subjects).press_enter()
