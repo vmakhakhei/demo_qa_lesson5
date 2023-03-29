@@ -1,5 +1,8 @@
-from selene import browser, be, have
+from selene import browser, be, have, by
 import os
+from selene.support.shared import browser
+
+from users.users import User
 
 months = ['January',
           'February',
@@ -18,6 +21,7 @@ months = ['January',
 
 class RegistrationPage:
     def __init__(self):
+        self.month_of_birth = browser.element(f".react-datepicker__month-select")
         self.first_name = browser.element("#firstName")
         self.last_name = browser.element("#lastName")
         self.email = browser.element("#userEmail")
@@ -29,9 +33,7 @@ class RegistrationPage:
         self.state = browser.element('#react-select-3-input')
         self.city = browser.element('#react-select-4-input')
         self.subjects = browser.element('#subjectsInput')
-        self.hobby_sports = browser.element('#hobbiesWrapper label[for="hobbies-checkbox-1"]')
-        self.hobby_reading = browser.element('#hobbiesWrapper label[for="hobbies-checkbox-2"]')
-        self.hobby_music = browser.element('#hobbiesWrapper label[for="hobbies-checkbox-3"]')
+        self._choose_hobby = browser.all('[for^=hobbies-checkbox]')
         self.upload_picture = browser.element('#uploadPicture')
         self.open_calendar = browser.element('#dateOfBirthInput')
         self.assert_modal = browser.element('.table')
@@ -48,13 +50,14 @@ class RegistrationPage:
     def fill_email(self, email):
         self.email.should(be.blank).type(email)
 
-    def fill_date_of_birth(self, day, month, year):
-        self.open_calendar.click()
-        browser.element(f".react-datepicker__month-select").type(month)
+    def fill_birthday(self, day, month, year):
+        browser.element('#dateOfBirthInput').click()
+        self.month_of_birth.type(month)
         assert month.title() in months, "Введено некорректное значение"
         browser.element(f'''.react-datepicker__year-select option[value="{year}"]''').click()
-        assert len(str(day)) == 2, "Введите дату двузначиным значением"
+        assert len(str(year)) == 4, 'Введено некорректное значение'
         browser.element(f'''.react-datepicker__day--0{day}''').click()
+        assert len(str(day)) == 2, "Введите дату двузначиным значением"
 
     def assert_registred_user_info(self, name, email, gender, phone, date, subjects, hobbies, avatar, address,
                                    city_option):
@@ -87,18 +90,41 @@ class RegistrationPage:
     def select_city(self, city):
         self.city.should(be.blank).type(city).press_enter()
 
-    def upload_picture(self):
-        self.upload_picture.send_keys(os.getcwd() + f'\\tests\\resources\\picture.jpg')
+    def upload_picture(self, name_picture):
+        self.upload_picture.send_keys(os.getcwd() + f'../tests/resources/{name_picture}')
 
     def select_subjects(self, subjects):
         self.subjects.should(be.blank).type(subjects).press_enter()
 
-    def select_hobbies(self, hobbies):
-        if hobbies.lower() == 'music':
-            self.hobby_music.click()
-        elif hobbies.lower() == 'reading':
-            self.hobby_reading.click()
-        elif hobbies.lower() == 'sports':
-            self.hobby_sports.click()
-        else:
-            raise AttributeError
+    def choose_hobby(self, hobby):
+        browser.all('[for^=hobbies-checkbox]').element_by(have.text(hobby)).click()
+
+    def register(self, student: User):
+        self.fill_first_name(student.first_name)
+        self.fill_last_name(student.last_name)
+        self.fill_email(student.email)
+        self.gender(student.gender)
+        self.type_phone(student.phone_number)
+        self.fill_birthday(student.day_of_birth, student.month_of_birth, student.year_of_birth)
+        self.select_subjects(student.subjects)
+        self.choose_hobby(student.hobby)
+        self.upload_picture(student.name_picture)
+        self.fill_current_address(student.adress)
+        self.select_state(student.state)
+        self.select_city(student.city)
+
+    def assert_registred_user(self, student: User):
+        browser.element('.table').all('td').even.should(
+            have.exact_texts(
+                f'{student.first_name} {student.last_name}',
+                student.email,
+                student.gender,
+                student.phone_number,
+                f'{student.day_of_birth} {student.month_of_birth},{student.year_of_birth}',
+                student.subjects,
+                student.hobby,
+                student.name_picture,
+                student.adress,
+                f'{student.state} {student.city}'
+            )
+        )

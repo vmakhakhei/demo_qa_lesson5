@@ -1,4 +1,21 @@
 from demo_qa_lesson5 import registration_form
+from users.users import User
+
+
+student = User(first_name='Uladzislau',
+               last_name="Makhakhei",
+               email='vladqaguru@gmail.com',
+               day_of_birth='03',
+               month_of_birth='July',
+               year_of_birth='1994',
+               gender='Male',
+               phone_number='2055551215',
+               subjects='Maths',
+               hobby='Music',
+               name_picture='picture.jpg',
+               adress='Minsk',
+               state='NCR',
+               city='Noida')
 
 
 def test_fill_fields(browser_setup):
@@ -6,31 +23,7 @@ def test_fill_fields(browser_setup):
 
     # WHEN
     registration_page.open()
-    registration_page.fill_first_name('Uladzislau')
-    registration_page.fill_last_name('Makhakhei')
-    registration_page.fill_email('vladqaguru@gmail.com')
-    registration_page.fill_date_of_birth('03', 'July', '1994')
-    registration_page.gender('Male')
-    registration_page.type_phone('2055551215')
-    registration_page.select_subjects('Maths')
-    registration_page.select_hobbies('Music')
-    registration_page.upload_picture()
-    registration_page.fill_current_address('Minsk')
-    registration_page.select_state('NCR')
-    registration_page.select_city('Noida')
-
+    registration_page.register(student)
     registration_page.click_submit()
-
     # THEN
-    registration_page.assert_registred_user_info(
-        'Uladzislau Makhakhei',
-        'vladqaguru@gmail.com',
-        'Male',
-        '2055551215',
-        '03 July,1994',
-        'Maths',
-        'Music',
-        'picture.jpg',
-        'Minsk',
-        'NCR Noida'
-    )
+    registration_page.assert_registred_user(student)
