@@ -1,7 +1,5 @@
 from demo_qa_lesson5 import registration_form
 
-avatar = 'picture.jpg'
-
 
 def test_fill_fields(browser_setup):
     registration_page = registration_form.RegistrationPage()

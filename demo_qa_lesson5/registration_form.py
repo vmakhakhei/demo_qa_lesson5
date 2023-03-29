@@ -34,18 +34,19 @@ class RegistrationPage:
         self.hobby_music = browser.element('#hobbiesWrapper label[for="hobbies-checkbox-3"]')
         self.upload_picture = browser.element('#uploadPicture')
         self.open_calendar = browser.element('#dateOfBirthInput')
+        self.assert_modal = browser.element('.table')
 
     def open(self):
         browser.open('/automation-practice-form')
 
     def fill_first_name(self, name):
-        browser.element("#firstName").should(be.blank).type(name)
+        self.first_name.should(be.blank).type(name)
 
     def fill_last_name(self, surname):
-        browser.element("#lastName").should(be.blank).type(surname)
+        self.last_name.should(be.blank).type(surname)
 
     def fill_email(self, email):
-        browser.element("#userEmail").should(be.blank).type(email)
+        self.email.should(be.blank).type(email)
 
     def fill_date_of_birth(self, day, month, year):
         self.open_calendar.click()
@@ -57,7 +58,7 @@ class RegistrationPage:
 
     def assert_registred_user_info(self, name, email, gender, phone, date, subjects, hobbies, avatar, address,
                                    city_option):
-        browser.element('.table').all('td').even.should(
+        self.assert_modal.all('td').even.should(
             have.exact_texts(name, email, gender, phone, date, subjects, hobbies, avatar, address, city_option, ))
 
     def gender(self, gender):
@@ -87,7 +88,7 @@ class RegistrationPage:
         self.city.should(be.blank).type(city).press_enter()
 
     def upload_picture(self):
-        browser.element('#uploadPicture').type(os.getcwd() + f'\\tests\\resources\\picture.jpg')
+        self.upload_picture.send_keys(os.getcwd() + f'\\tests\\resources\\picture.jpg')
 
     def select_subjects(self, subjects):
         self.subjects.should(be.blank).type(subjects).press_enter()
