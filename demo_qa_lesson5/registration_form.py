@@ -1,18 +1,18 @@
-from selene import browser, be, have, by
+from selene import browser, be, have
 import os
 
 months = ['January',
-         'February',
-         'March',
-         'April',
-         'May',
-         'June',
-         'July',
-         'August',
-         'September',
-         'October',
-         'November',
-         'December'
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'November',
+          'December'
           ]
 
 
@@ -32,7 +32,7 @@ class RegistrationPage:
         self.hobby_sports = browser.element('#hobbiesWrapper label[for="hobbies-checkbox-1"]')
         self.hobby_reading = browser.element('#hobbiesWrapper label[for="hobbies-checkbox-2"]')
         self.hobby_music = browser.element('#hobbiesWrapper label[for="hobbies-checkbox-3"]')
-        self.upload_picture = browser.element(by.id('uploadPicture'))
+        self.upload_picture = browser.element('#uploadPicture')
         self.open_calendar = browser.element('#dateOfBirthInput')
 
     def open(self):
@@ -86,8 +86,8 @@ class RegistrationPage:
     def select_city(self, city):
         self.city.should(be.blank).type(city).press_enter()
 
-    def upload_picture(self, picture_path):
-        self.upload_picture.type(os.getcwd() + f'/tests/resourses/{picture_path}')
+    def upload_picture(self):
+        browser.element('#uploadPicture').type(os.getcwd() + f'\\tests\\resources\\picture.jpg')
 
     def select_subjects(self, subjects):
         self.subjects.should(be.blank).type(subjects).press_enter()
