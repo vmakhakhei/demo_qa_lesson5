@@ -32,7 +32,7 @@ class RegistrationPage:
         self.hobby_sports = browser.element('#hobbiesWrapper label[for="hobbies-checkbox-1"]')
         self.hobby_reading = browser.element('#hobbiesWrapper label[for="hobbies-checkbox-2"]')
         self.hobby_music = browser.element('#hobbiesWrapper label[for="hobbies-checkbox-3"]')
-        self.upload_picture = browser.element('#uploadPicture')
+        self.upload_picture_element = browser.element('#uploadPicture')
         self.open_calendar = browser.element('#dateOfBirthInput')
         self.assert_modal = browser.element('.table')
 
@@ -87,8 +87,8 @@ class RegistrationPage:
     def select_city(self, city):
         self.city.should(be.blank).type(city).press_enter()
 
-    def upload_picture(self):
-        self.upload_picture.send_keys(os.getcwd() + f'\\tests\\resources\\picture.jpg')
+    def upload_avatar(self, image):
+        self.upload_picture_element.send_keys(os.getcwd() + f'\\resources\\{image}')
 
     def select_subjects(self, subjects):
         self.subjects.should(be.blank).type(subjects).press_enter()
