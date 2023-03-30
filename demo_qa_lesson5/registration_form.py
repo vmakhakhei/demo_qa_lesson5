@@ -34,7 +34,7 @@ class RegistrationPage:
         self.city = browser.element('#react-select-4-input')
         self.subjects = browser.element('#subjectsInput')
         self._choose_hobby = browser.all('[for^=hobbies-checkbox]')
-        self.upload_picture = browser.element('#uploadPicture')
+        self.upload_picture_element = browser.element('#uploadPicture')
         self.open_calendar = browser.element('#dateOfBirthInput')
         self.assert_modal = browser.element('.table')
 
@@ -90,8 +90,8 @@ class RegistrationPage:
     def select_city(self, city):
         self.city.should(be.blank).type(city).press_enter()
 
-    def upload_picture(self, name_picture):
-        self.upload_picture.send_keys(os.getcwd() + f'../tests/resources/{name_picture}')
+    def upload_avatar(self, name_picture):
+        self.upload_picture_element.send_keys(f'{os.getcwd()}\\resources\\{name_picture}')
 
     def select_subjects(self, subjects):
         self.subjects.should(be.blank).type(subjects).press_enter()
@@ -108,7 +108,7 @@ class RegistrationPage:
         self.fill_birthday(student.day_of_birth, student.month_of_birth, student.year_of_birth)
         self.select_subjects(student.subjects)
         self.choose_hobby(student.hobby)
-        self.upload_picture(student.name_picture)
+        self.upload_avatar(student.name_picture)
         self.fill_current_address(student.adress)
         self.select_state(student.state)
         self.select_city(student.city)
