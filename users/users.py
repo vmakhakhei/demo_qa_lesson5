@@ -14,6 +14,7 @@ class Subjects(Enum):
     biology = "Biology"
 
 
+
 @dataclass
 class User:
     first_name: str
@@ -24,7 +25,7 @@ class User:
     day_of_birth: str
     month_of_birth: str
     year_of_birth: str
-    subjects: str
+    subjects: list[Subjects]
     hobbies: str
     name_picture: str
     adress: str

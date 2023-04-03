@@ -94,10 +94,12 @@ class RegistrationPage:
         self.upload_picture_element.send_keys(f'{os.getcwd()}\\resources\\{name_picture}')
 
     def select_subjects(self, subjects):
-        self.subjects.should(be.blank).type(subjects).press_enter()
+        for subject in subjects:
+            self.subjects.should(be.blank).type(subject).press_enter()
 
-    def choose_hobby(self, hobby):
-        browser.all('[for^=hobbies-checkbox]').element_by(have.text(hobby)).click()
+    def choose_hobby(self, hobbies):
+        for hobby in hobbies:
+            browser.all('[for^=hobbies-checkbox]').element_by(have.text(hobby)).click()
 
     def register(self, student: User):
         self.fill_first_name(student.first_name)
@@ -121,8 +123,8 @@ class RegistrationPage:
                 student.gender,
                 student.phone_number,
                 f'{student.day_of_birth} {student.month_of_birth},{student.year_of_birth}',
-                student.subjects,
-                student.hobbies,
+                ', '.join(student.subjects),
+                ', '.join(student.hobbies),
                 student.name_picture,
                 student.adress,
                 f'{student.state} {student.city}'

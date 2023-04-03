@@ -1,5 +1,5 @@
 from demo_qa_lesson5 import registration_form
-from users.users import User, Subjects
+from users.users import User, Subjects, Hobby
 
 student = User(
     first_name='Uladzislau',
@@ -10,8 +10,8 @@ student = User(
     year_of_birth='1994',
     gender='Male',
     phone_number='2055551215',
-    subjects=Subjects.maths.value,
-    hobbies='Music',
+    subjects=[Subjects.maths.value, Subjects.biology.value],
+    hobbies=[Hobby.Music.value, Hobby.Sports.value],
     name_picture='picture.jpg',
     adress='Minsk',
     state='NCR',
