@@ -1,4 +1,17 @@
 from dataclasses import dataclass
+from enum import Enum
+
+
+class Hobby(Enum):
+    Sports = 'Sports'
+    Reading = 'Reading'
+    Music = 'Music'
+
+class Subjects(Enum):
+    maths = "Maths"
+    chemistry = "Chemistry"
+    english = "English"
+    biology = "Biology"
 
 
 @dataclass
@@ -12,7 +25,7 @@ class User:
     month_of_birth: str
     year_of_birth: str
     subjects: str
-    hobby: str
+    hobbies: str
     name_picture: str
     adress: str
     state: str

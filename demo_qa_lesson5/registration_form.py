@@ -107,7 +107,7 @@ class RegistrationPage:
         self.type_phone(student.phone_number)
         self.fill_birthday(student.day_of_birth, student.month_of_birth, student.year_of_birth)
         self.select_subjects(student.subjects)
-        self.choose_hobby(student.hobby)
+        self.choose_hobby(student.hobbies)
         self.upload_avatar(student.name_picture)
         self.fill_current_address(student.adress)
         self.select_state(student.state)
@@ -122,7 +122,7 @@ class RegistrationPage:
                 student.phone_number,
                 f'{student.day_of_birth} {student.month_of_birth},{student.year_of_birth}',
                 student.subjects,
-                student.hobby,
+                student.hobbies,
                 student.name_picture,
                 student.adress,
                 f'{student.state} {student.city}'
