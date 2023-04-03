@@ -3,9 +3,9 @@ from demo_qa_lesson5 import registration_form
 
 def test_fill_fields(browser_setup):
     registration_page = registration_form.RegistrationPage()
+    registration_page.open()
 
     # WHEN
-    registration_page.open()
     registration_page.fill_first_name('Uladzislau')
     registration_page.fill_last_name('Makhakhei')
     registration_page.fill_email('vladqaguru@gmail.com')
@@ -18,8 +18,7 @@ def test_fill_fields(browser_setup):
     registration_page.fill_current_address('Minsk')
     registration_page.select_state('NCR')
     registration_page.select_city('Noida')
-
-    registration_page.click_submit()
+    registration_page.submit()
 
     # THEN
     registration_page.assert_registred_user_info(

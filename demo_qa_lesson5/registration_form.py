@@ -74,7 +74,7 @@ class RegistrationPage:
     def type_phone(self, phone_number):
         self.user_number.should(be.blank).type(phone_number)
 
-    def click_submit(self):
+    def submit(self):
         browser.execute_script("document.querySelector('#submit').click()")
 
     def fill_current_address(self, current_address):
