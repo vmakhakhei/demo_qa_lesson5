@@ -1,19 +1,20 @@
 from selene import browser, be, have
 import os
 
-months = ['January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-          'July',
-          'August',
-          'September',
-          'October',
-          'November',
-          'December'
-          ]
+months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+]
 
 
 class RegistrationPage:
@@ -29,15 +30,21 @@ class RegistrationPage:
         self.state = browser.element('#react-select-3-input')
         self.city = browser.element('#react-select-4-input')
         self.subjects = browser.element('#subjectsInput')
-        self.hobby_sports = browser.element('#hobbiesWrapper label[for="hobbies-checkbox-1"]')
-        self.hobby_reading = browser.element('#hobbiesWrapper label[for="hobbies-checkbox-2"]')
-        self.hobby_music = browser.element('#hobbiesWrapper label[for="hobbies-checkbox-3"]')
+        self.hobby_sports = browser.element(
+            '#hobbiesWrapper label[for="hobbies-checkbox-1"]'
+        )
+        self.hobby_reading = browser.element(
+            '#hobbiesWrapper label[for="hobbies-checkbox-2"]'
+        )
+        self.hobby_music = browser.element(
+            '#hobbiesWrapper label[for="hobbies-checkbox-3"]'
+        )
         self.upload_picture_element = browser.element('#uploadPicture')
         self.open_calendar = browser.element('#dateOfBirthInput')
         self.assert_modal = browser.element('.table')
 
-    def open(self):
-        browser.open('/automation-practice-form')
+    def open_registration_page(self):
+        browser.open_registration_page()
 
     def fill_first_name(self, name):
         self.first_name.should(be.blank).type(name)
@@ -52,14 +59,39 @@ class RegistrationPage:
         self.open_calendar.click()
         browser.element(f".react-datepicker__month-select").type(month)
         assert month.title() in months, "Введено некорректное значение"
-        browser.element(f'''.react-datepicker__year-select option[value="{year}"]''').click()
+        browser.element(
+            f'''.react-datepicker__year-select option[value="{year}"]'''
+        ).click()
         assert len(str(day)) == 2, "Введите дату двузначиным значением"
         browser.element(f'''.react-datepicker__day--0{day}''').click()
 
-    def assert_registred_user_info(self, name, email, gender, phone, date, subjects, hobbies, avatar, address,
-                                   city_option):
+    def assert_registred_user_info(
+        self,
+        name,
+        email,
+        gender,
+        phone,
+        date,
+        subjects,
+        hobbies,
+        avatar,
+        address,
+        city_option,
+    ):
         self.assert_modal.all('td').even.should(
-            have.exact_texts(name, email, gender, phone, date, subjects, hobbies, avatar, address, city_option, ))
+            have.exact_texts(
+                name,
+                email,
+                gender,
+                phone,
+                date,
+                subjects,
+                hobbies,
+                avatar,
+                address,
+                city_option,
+            )
+        )
 
     def gender(self, gender):
         if gender.lower() == 'male':

@@ -3,7 +3,8 @@ from demo_qa_lesson5 import registration_form
 
 def test_fill_fields(browser_setup):
     registration_page = registration_form.RegistrationPage()
-    registration_page.open()
+
+    registration_page.open_registration_page()
 
     # WHEN
     registration_page.fill_first_name('Uladzislau')
@@ -31,5 +32,5 @@ def test_fill_fields(browser_setup):
         'Music',
         'picture.jpg',
         'Minsk',
-        'NCR Noida'
+        'NCR Noida',
     )
