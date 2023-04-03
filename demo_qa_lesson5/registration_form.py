@@ -1,22 +1,23 @@
-from selene import browser, be, have, by
+from selene import browser, be, have
 import os
 from selene.support.shared import browser
 
 from users.users import User
 
-months = ['January',
-          'February',
-          'March',
-          'April',
-          'May',
-          'June',
-          'July',
-          'August',
-          'September',
-          'October',
-          'November',
-          'December'
-          ]
+months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+]
 
 
 class RegistrationPage:
@@ -54,15 +55,40 @@ class RegistrationPage:
         browser.element('#dateOfBirthInput').click()
         self.month_of_birth.type(month)
         assert month.title() in months, "Введено некорректное значение"
-        browser.element(f'''.react-datepicker__year-select option[value="{year}"]''').click()
+        browser.element(
+            f'''.react-datepicker__year-select option[value="{year}"]'''
+        ).click()
         assert len(str(year)) == 4, 'Введено некорректное значение'
         browser.element(f'''.react-datepicker__day--0{day}''').click()
         assert len(str(day)) == 2, "Введите дату двузначиным значением"
 
-    def assert_registred_user_info(self, name, email, gender, phone, date, subjects, hobbies, avatar, address,
-                                   city_option):
+    def assert_registred_user_info(
+        self,
+        name,
+        email,
+        gender,
+        phone,
+        date,
+        subjects,
+        hobbies,
+        avatar,
+        address,
+        city_option,
+    ):
         self.assert_modal.all('td').even.should(
-            have.exact_texts(name, email, gender, phone, date, subjects, hobbies, avatar, address, city_option, ))
+            have.exact_texts(
+                name,
+                email,
+                gender,
+                phone,
+                date,
+                subjects,
+                hobbies,
+                avatar,
+                address,
+                city_option,
+            )
+        )
 
     def gender(self, gender):
         if gender.lower() == 'male':
@@ -91,7 +117,9 @@ class RegistrationPage:
         self.city.should(be.blank).type(city).press_enter()
 
     def upload_avatar(self, name_picture):
-        self.upload_picture_element.send_keys(f'{os.getcwd()}\\resources\\{name_picture}')
+        self.upload_picture_element.send_keys(
+            f'{os.getcwd()}\\resources\\{name_picture}'
+        )
 
     def select_subjects(self, subjects):
         for subject in subjects:
@@ -107,7 +135,9 @@ class RegistrationPage:
         self.fill_email(student.email)
         self.gender(student.gender)
         self.type_phone(student.phone_number)
-        self.fill_birthday(student.day_of_birth, student.month_of_birth, student.year_of_birth)
+        self.fill_birthday(
+            student.day_of_birth, student.month_of_birth, student.year_of_birth
+        )
         self.select_subjects(student.subjects)
         self.choose_hobby(student.hobbies)
         self.upload_avatar(student.name_picture)
@@ -127,6 +157,6 @@ class RegistrationPage:
                 ', '.join(student.hobbies),
                 student.name_picture,
                 student.adress,
-                f'{student.state} {student.city}'
+                f'{student.state} {student.city}',
             )
         )
