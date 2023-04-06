@@ -1,5 +1,4 @@
 import allure
-from tests.conftest import browser_setup
 from demo_qa_lesson5 import registration_form
 
 

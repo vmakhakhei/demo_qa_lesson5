@@ -1,7 +1,6 @@
 import allure
 from selene import browser, be, have
 import os
-from tests.conftest import browser_setup
 
 months = [
     'January',
