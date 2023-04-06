@@ -44,23 +44,18 @@ class RegistrationPage:
         self.open_calendar = browser.element('#dateOfBirthInput')
         self.assert_modal = browser.element('.table')
 
-    @allure.step('Open registration page')
     def open(self, page):
         browser.open(page)
 
-    @allure.step('Fill the First Name field')
     def fill_first_name(self, name):
         self.first_name.should(be.blank).type(name)
 
-    @allure.step('Fill the Last Name field')
     def fill_last_name(self, surname):
         self.last_name.should(be.blank).type(surname)
 
-    @allure.step('Fill the Email field')
     def fill_email(self, email):
         self.email.should(be.blank).type(email)
 
-    @allure.step('Fill the date of birth')
     def fill_date_of_birth(self, day, month, year):
         self.open_calendar.click()
         browser.element(f".react-datepicker__month-select").type(month)
@@ -71,7 +66,6 @@ class RegistrationPage:
         assert len(str(day)) == 2, "Введите дату двузначиным значением"
         browser.element(f'''.react-datepicker__day--0{day}''').click()
 
-    @allure.step('Assert registred user information ')
     def assert_registred_user_info(
         self,
         name,
@@ -100,7 +94,6 @@ class RegistrationPage:
             )
         )
 
-    @allure.step('Select gender')
     def gender(self, gender):
         if gender.lower() == 'male':
             self.gender_male.click()
@@ -111,36 +104,28 @@ class RegistrationPage:
         else:
             raise AttributeError
 
-    @allure.step('Fill phone field')
     def type_phone(self, phone_number):
         self.user_number.should(be.blank).type(phone_number)
 
-    @allure.step('Click the submit button')
     def submit(self):
         browser.execute_script("document.querySelector('#submit').click()")
 
-    @allure.step('Fill current address field')
     def fill_current_address(self, current_address):
         self.current_adress.should(be.blank).type(current_address)
         pass
 
-    @allure.step('Select State')
     def select_state(self, state):
         self.state.should(be.blank).type(state).press_enter()
 
-    @allure.step('Select City')
     def select_city(self, city):
         self.city.should(be.blank).type(city).press_enter()
 
-    @allure.step('Upload image')
     def upload_avatar(self, image):
         self.upload_picture_element.send_keys(os.getcwd() + f'\\resources\\{image}')
 
-    @allure.step('Select subjects')
     def select_subjects(self, subjects):
         self.subjects.should(be.blank).type(subjects).press_enter()
 
-    @allure.step('Select hobbies')
     def select_hobbies(self, hobbies):
         if hobbies.lower() == 'music':
             self.hobby_music.click()

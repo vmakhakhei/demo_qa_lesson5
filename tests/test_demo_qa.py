@@ -2,7 +2,6 @@ import allure
 from demo_qa_lesson5 import registration_form
 
 
-@allure.title('Register user and match the user info')
 def test_fill_fields(browser_setup):
     registration_page = registration_form.RegistrationPage()
 
