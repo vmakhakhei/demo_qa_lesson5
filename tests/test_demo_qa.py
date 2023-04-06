@@ -1,10 +1,13 @@
+import allure
+from tests.conftest import browser_setup
 from demo_qa_lesson5 import registration_form
 
 
+@allure.title('Register user and match the user info')
 def test_fill_fields(browser_setup):
     registration_page = registration_form.RegistrationPage()
 
-    registration_page.open_registration_page()
+    registration_page.open('/automation-practice-form')
 
     # WHEN
     registration_page.fill_first_name('Uladzislau')
