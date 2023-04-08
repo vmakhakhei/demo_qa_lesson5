@@ -1,3 +1,4 @@
+import allure
 from selene import browser, be, have
 import os
 from selene.support.shared import browser
@@ -39,6 +40,7 @@ class RegistrationPage:
         self.open_calendar = browser.element('#dateOfBirthInput')
         self.assert_modal = browser.element('.table')
 
+    @allure.step('Open register page')
     def open(self):
         browser.open('/automation-practice-form')
 
@@ -103,6 +105,7 @@ class RegistrationPage:
     def type_phone(self, phone_number):
         self.user_number.should(be.blank).type(phone_number)
 
+    @allure.step('Click submit button')
     def click_submit(self):
         browser.execute_script("document.querySelector('#submit').click()")
 
@@ -118,7 +121,7 @@ class RegistrationPage:
 
     def upload_avatar(self, name_picture):
         self.upload_picture_element.send_keys(
-            f'{os.getcwd()}\\resources\\{name_picture}'
+            f'{os.getcwd()}/resources/{name_picture}'
         )
 
     def select_subjects(self, subjects):
@@ -129,6 +132,7 @@ class RegistrationPage:
         for hobby in hobbies:
             browser.all('[for^=hobbies-checkbox]').element_by(have.text(hobby)).click()
 
+    @allure.step('Filling info about user')
     def register(self, student: User):
         self.fill_first_name(student.first_name)
         self.fill_last_name(student.last_name)
@@ -145,6 +149,7 @@ class RegistrationPage:
         self.select_state(student.state)
         self.select_city(student.city)
 
+    @allure.step('Assert inserted information')
     def assert_registred_user(self, student: User):
         browser.element('.table').all('td').even.should(
             have.exact_texts(
