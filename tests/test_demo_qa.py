@@ -28,8 +28,12 @@ def test_fill_fields(browser_setup):
     registration_page = registration_form.RegistrationPage()
 
     # WHEN
-    registration_page.open()
-    registration_page.register(student)
-    registration_page.click_submit()
+    with allure.step('Open Registration page'):
+        registration_page.open()
+    with allure.step('Fill register data'):
+        registration_page.register(student)
+    with allure.step('Click submit button'):
+        registration_page.click_submit()
     # THEN
-    registration_page.assert_registred_user(student)
+    with allure.step('Assert filled data'):
+        registration_page.assert_registred_user(student)

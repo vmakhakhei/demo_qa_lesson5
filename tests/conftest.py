@@ -2,6 +2,7 @@ import pytest
 from selene.support.shared import browser
 from utils import attach
 
+DEFAULT_BROWSER_VERSION = "100.0"
 
 @pytest.fixture
 def browser_setup():
