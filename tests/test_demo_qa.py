@@ -24,21 +24,17 @@ student = User(
 
 
 @allure.title('Register user')
-def test_fill_fields(browser_setup):
+def test_fill_fields(setup_browser):
+
     registration_page = registration_form.RegistrationPage()
 
     # WHEN
-    with allure.step('Open Registration page'):
-        registration_page.open()
-    with allure.step('Fill register data'):
-        registration_page.register(student)
-    with allure.step('Click submit button'):
-        registration_page.click_submit()
+    registration_page.open()
+    registration_page.register(student)
+    registration_page.click_submit()
     # THEN
-    with allure.step('Assert filled data'):
-        registration_page.assert_registred_user(student)
+    registration_page.assert_registred_user(student)
 
     attach.add_html(browser)
     attach.add_screenshot(browser)
     attach.add_logs(browser)
-    attach.add_video(browser)
