@@ -41,3 +41,5 @@ def test_fill_fields(browser_setup):
     attach.add_html(browser)
     attach.add_screenshot(browser)
     attach.add_logs(browser)
+    attach.add_video(browser)
+
