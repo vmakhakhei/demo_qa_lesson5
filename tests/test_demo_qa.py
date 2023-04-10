@@ -33,7 +33,3 @@ def test_fill_fields(browser_setup):
     registration_page.click_submit()
     # THEN
     registration_page.assert_registred_user(student)
-
-    attach.add_html(browser)
-    attach.add_screenshot(browser)
-    attach.add_logs(browser)
