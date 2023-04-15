@@ -40,9 +40,8 @@ class RegistrationPage:
         self.open_calendar = browser.element('#dateOfBirthInput')
         self.assert_modal = browser.element('.table')
 
-    @allure.step('Open register page')
     def open_page_autoform(self):
-        browser.open('/automation-practice-form')
+        browser.open('http://demoqa.com/automation-practice-form')
 
     def fill_first_name(self, name):
         self.first_name.should(be.blank).type(name)
@@ -120,9 +119,7 @@ class RegistrationPage:
         self.city.should(be.blank).type(city).press_enter()
 
     def upload_avatar(self, name_picture):
-        self.upload_picture_element.send_keys(
-            f'{os.getcwd()}/resources/{name_picture}'
-        )
+        self.upload_picture_element.send_keys(f'{os.getcwd()}/resources/{name_picture}')
 
     def select_subjects(self, subjects):
         for subject in subjects:
