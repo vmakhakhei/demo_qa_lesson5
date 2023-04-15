@@ -38,6 +38,7 @@ class RegistrationPage:
         self.upload_picture_element = self.browser.element('#uploadPicture')
         self.open_calendar = self.browser.element('#dateOfBirthInput')
         self.assert_modal = self.browser.element('.table')
+        self.submit = self.browser.element('#submit')
 
     def open_page_autoform(self):
         self.browser.open('http://demoqa.com/automation-practice-form')
@@ -107,7 +108,7 @@ class RegistrationPage:
 
     @allure.step('Click submit button')
     def click_submit(self):
-        self.browser.self.browser.element('#submit')
+        self.submit.click()
 
     def fill_current_address(self, current_address):
         self.current_adress.should(be.blank).type(current_address)
