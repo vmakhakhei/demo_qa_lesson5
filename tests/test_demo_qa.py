@@ -29,7 +29,7 @@ def test_fill_fields(browser_setup):
 
     # WHEN
     with allure.step('Open the page'):
-        registration_page.open()
+        registration_page.open_page_autoform()
     with allure.step('Filling user data'):
         registration_page.register(student)
     with allure.step('Submit'):

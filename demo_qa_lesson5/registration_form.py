@@ -41,7 +41,7 @@ class RegistrationPage:
         self.assert_modal = browser.element('.table')
 
     @allure.step('Open register page')
-    def open(self):
+    def open_page_autoform(self):
         browser.open('/automation-practice-form')
 
     def fill_first_name(self, name):
