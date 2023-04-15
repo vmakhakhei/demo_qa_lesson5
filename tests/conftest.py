@@ -5,11 +5,21 @@ from selenium.webdriver.chrome.options import Options
 from utils.attach import add_logs, add_html, add_screenshot
 
 
-@pytest.fixture(scope='session')
-def browser_setup():
+def pytest_addoption(parser):
+    parser.addoption(
+        '--browser',
+        help='browser in which will be start tests',
+        choices=['firefox', 'chrome'],
+        default='chrome',
+    )
+
+
+@pytest.fixture(scope='function')
+def browser_setup(request):
+    browser_name = request.config.getoption('--browser')
     options = Options()
     selenoid_capabilities = {
-        "browserName": "chrome",
+        "browserName": browser_name,
         "browserVersion": "100.0",
         "selenoid:options": {"enableVNC": True, "enableVideo": False},
     }

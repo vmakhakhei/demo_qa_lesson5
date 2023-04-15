@@ -2,7 +2,6 @@ import allure
 from selene import browser, be, have
 import os
 from selene.support.shared import browser
-
 from users.users import User
 
 months = [
@@ -22,26 +21,28 @@ months = [
 
 
 class RegistrationPage:
-    def __init__(self):
-        self.month_of_birth = browser.element(f".react-datepicker__month-select")
-        self.first_name = browser.element("#firstName")
-        self.last_name = browser.element("#lastName")
-        self.email = browser.element("#userEmail")
-        self.gender_male = browser.element('[for=gender-radio-1]')
-        self.gender_woman = browser.element('[for=gender-radio-2]')
-        self.gender_other = browser.element('[for=gender-radio-3]')
-        self.user_number = browser.element("#userNumber")
-        self.current_adress = browser.element('#currentAddress')
-        self.state = browser.element('#react-select-3-input')
-        self.city = browser.element('#react-select-4-input')
-        self.subjects = browser.element('#subjectsInput')
-        self._choose_hobby = browser.all('[for^=hobbies-checkbox]')
-        self.upload_picture_element = browser.element('#uploadPicture')
-        self.open_calendar = browser.element('#dateOfBirthInput')
-        self.assert_modal = browser.element('.table')
+    def __init__(self, browser_setup):
+        self.browser = browser_setup
+        self.month_of_birth = self.browser.element(f".react-datepicker__month-select")
+        self.first_name = self.browser.element("#firstName")
+        self.last_name = self.browser.element("#lastName")
+        self.email = self.browser.element("#userEmail")
+        self.gender_male = self.browser.element('[for=gender-radio-1]')
+        self.gender_woman = self.browser.element('[for=gender-radio-2]')
+        self.gender_other = self.browser.element('[for=gender-radio-3]')
+        self.user_number = self.browser.element("#userNumber")
+        self.current_adress = self.browser.element('#currentAddress')
+        self.state = self.browser.element('#react-select-3-input')
+        self.city = self.browser.element('#react-select-4-input')
+        self.subjects = self.browser.element('#subjectsInput')
+        self._choose_hobby = self.browser.all('[for^=hobbies-checkbox]')
+        self.upload_picture_element = self.browser.element('#uploadPicture')
+        self.open_calendar = self.browser.element('#dateOfBirthInput')
+        self.assert_modal = self.browser.element('.table')
 
     def open_page_autoform(self):
-        browser.open('http://demoqa.com/automation-practice-form')
+        self.browser.open('http://demoqa.com/automation-practice-form')
+        self.browser.config.driver.maximize_window()
 
     def fill_first_name(self, name):
         self.first_name.should(be.blank).type(name)
@@ -53,15 +54,12 @@ class RegistrationPage:
         self.email.should(be.blank).type(email)
 
     def fill_birthday(self, day, month, year):
-        browser.element('#dateOfBirthInput').click()
+        self.browser.element('#dateOfBirthInput').click()
         self.month_of_birth.type(month)
-        assert month.title() in months, "Введено некорректное значение"
-        browser.element(
+        self.browser.element(
             f'''.react-datepicker__year-select option[value="{year}"]'''
         ).click()
-        assert len(str(year)) == 4, 'Введено некорректное значение'
-        browser.element(f'''.react-datepicker__day--0{day}''').click()
-        assert len(str(day)) == 2, "Введите дату двузначиным значением"
+        self.browser.element(f'''.react-datepicker__day--0{day}''').click()
 
     def assert_registred_user_info(
         self,
@@ -106,7 +104,7 @@ class RegistrationPage:
 
     @allure.step('Click submit button')
     def click_submit(self):
-        browser.execute_script("document.querySelector('#submit').click()")
+        self.browser.execute_script("document.querySelector('#submit').click()")
 
     def fill_current_address(self, current_address):
         self.current_adress.should(be.blank).type(current_address)
@@ -127,7 +125,7 @@ class RegistrationPage:
 
     def choose_hobby(self, hobbies):
         for hobby in hobbies:
-            browser.all('[for^=hobbies-checkbox]').element_by(have.text(hobby)).click()
+            self.browser.all('[for^=hobbies-checkbox]').element_by(have.text(hobby)).click()
 
     @allure.step('Filling info about user')
     def register(self, student: User):
@@ -148,7 +146,7 @@ class RegistrationPage:
 
     @allure.step('Assert inserted information')
     def assert_registred_user(self, student: User):
-        browser.element('.table').all('td').even.should(
+        self.browser.element('.table').all('td').even.should(
             have.exact_texts(
                 f'{student.first_name} {student.last_name}',
                 student.email,
