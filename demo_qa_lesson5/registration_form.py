@@ -1,7 +1,6 @@
 import allure
-from selene import browser, be, have
+from selene import be, have
 import os
-from selene.support.shared import browser
 from users.users import User
 
 months = [
