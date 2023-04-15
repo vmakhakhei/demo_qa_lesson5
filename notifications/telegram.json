@@ -1,0 +1,18 @@
+{
+  "base": {
+    "project": "Allure-Reports",
+    "environment": "lesson-12-telegram_chat-bot",
+    "comment": "test comment",
+    "reportLink": "",
+    "language": "en",
+    "allureFolder": "allure-results",
+    "enableChart": true
+  },
+  "telegram": {
+    "token": "5905678666:AAEl3AAwPhcgTalwG1UMOl127huaqRClJ5s",
+    "chat": "-1001901519287",
+    "replyTo": ""
+  }
+}
+
+java "-DconfigFile=notifications/telegram.json" -jar notifications/allure-notifications-4.2.1.jar
