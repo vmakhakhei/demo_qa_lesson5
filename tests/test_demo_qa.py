@@ -25,7 +25,7 @@ student = User(
 
 @allure.title('Register user')
 def test_fill_fields(browser_setup):
-    registration_page = registration_form.RegistrationPage(browser_setup)
+    registration_page = registration_form.RegistrationPage()
 
     # WHEN
     with allure.step('Open the page'):
