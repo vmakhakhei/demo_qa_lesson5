@@ -1,16 +1,17 @@
 {
   "base": {
-    "project": "Allure-Reports",
-    "environment": "lesson-12-telegram_chat-bot",
-    "comment": "test comment",
-    "reportLink": "",
+    "logo": "",
+    "project": "${JOB_BASE_NAME}",
+    "environment": "v_makei",
+    "comment": "@v_makei here some problems",
+    "reportLink": "${BUILD_URL}",
     "language": "en",
-    "allureFolder": "allure-results",
+    "allureFolder": "allure-report/",
     "enableChart": true
   },
   "telegram": {
     "token": "5905678666:AAEl3AAwPhcgTalwG1UMOl127huaqRClJ5s",
-    "chat": "-1001901519287",
+    "chat": "-1001863589604",
     "replyTo": ""
   }
 }
