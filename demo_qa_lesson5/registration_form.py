@@ -1,5 +1,5 @@
 import allure
-from selene import be, have, command
+from selene import be, have
 import os
 from users.users import User
 
@@ -38,15 +38,11 @@ class RegistrationPage:
         self.upload_picture_element = self.browser.element('#uploadPicture')
         self.open_calendar = self.browser.element('#dateOfBirthInput')
         self.assert_modal = self.browser.element('.table')
-        self.submit = self.browser.element('#submit')
+        self.submit = self.browser.execute_script("document.querySelector('#submit').click()")
 
     def open_page_autoform(self):
         self.browser.open('http://demoqa.com/automation-practice-form')
         self.browser.config.driver.maximize_window()
-        self.browser.all('[id^=google_ads][id$=container__]').with_(timeout=10).wait_until(
-            have.size_greater_than_or_equal(3)
-        )
-        self.browser.all('[id^=google_ads][id$=container__]').perform(command.js.remove)
 
     def fill_first_name(self, name):
         self.first_name.should(be.blank).type(name)
