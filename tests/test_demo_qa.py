@@ -47,6 +47,7 @@ def test_submit_empty_form(browser_setup):
     registration_page.validation_phone()
 
 
+@allure.title("Fill Only required fields")
 def test_fill_required_fields(browser_setup):
     registration_page = registration_form.RegistrationPage()
 
@@ -64,6 +65,7 @@ def test_fill_required_fields(browser_setup):
     ).check_registred_data(student.gender).check_registred_data(student.phone_number)
 
 
+@allure.title("fill mobile phone less numbers than required")
 def test_fill_mobile_less_than_required(browser_setup):
     registration_page = registration_form.RegistrationPage()
 
@@ -80,6 +82,7 @@ def test_fill_mobile_less_than_required(browser_setup):
     registration_page.validation_phone()
 
 
+@allure.title("Fill email on incorrect format")
 def test_email_validation(browser_setup):
     registration_page = registration_form.RegistrationPage()
 
