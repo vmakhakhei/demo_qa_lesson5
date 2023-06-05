@@ -47,18 +47,22 @@ class RegistrationPage:
         browser.open(url)
         return self
 
+    @allure.step("Fill first name")
     def fill_first_name(self, name):
         self.first_name.should(be.blank).type(name)
         return self
 
+    @allure.step("Fill last name")
     def fill_last_name(self, surname):
         self.last_name.should(be.blank).type(surname)
         return self
 
+    @allure.step("Fill Email")
     def fill_email(self, email):
         self.email.should(be.blank).type(email)
         return self
 
+    @allure.step("Fill Birthday")
     def fill_birthday(self, day, month, year):
         browser.element("#dateOfBirthInput").click()
         self.month_of_birth.type(month)
@@ -71,6 +75,7 @@ class RegistrationPage:
         assert len(str(day)) == 2, "Введите дату двузначиным значением"
         return self
 
+    @allure.step("Assert Registred Info")
     def assert_registred_user_info(
         self,
         name,
@@ -110,6 +115,7 @@ class RegistrationPage:
             raise AttributeError
         return self
 
+    @allure.step("Type phone number")
     def type_phone(self, phone_number):
         self.user_number.should(be.blank).type(phone_number)
         return self
@@ -119,28 +125,34 @@ class RegistrationPage:
         browser.execute_script("document.querySelector('#submit').click()")
         return self
 
+    @allure.step("Fill currect adress")
     def fill_current_address(self, current_address):
         self.current_adress.should(be.blank).type(current_address)
         pass
         return self
 
+    @allure.step("Select State")
     def select_state(self, state):
         self.state.should(be.blank).type(state).press_enter()
         return self
 
+    @allure.step("Select City")
     def select_city(self, city):
         self.city.should(be.blank).type(city).press_enter()
         return self
 
+    @allure.step("Upload Avatar")
     def upload_avatar(self, name_picture):
         self.upload_picture_element.send_keys(f"{os.getcwd()}/tests/resources/{name_picture}")
         return self
 
+    @allure.step("Select Subjects")
     def select_subjects(self, subjects):
         for subject in subjects:
             self.subjects.should(be.blank).type(subject).press_enter()
         return self
 
+    @allure.step("Choose Hobbies")
     def choose_hobby(self, hobbies):
         for hobby in hobbies:
             browser.all("[for^=hobbies-checkbox]").element_by(have.text(hobby)).click()
@@ -181,29 +193,35 @@ class RegistrationPage:
             )
         )
 
+    @allure.step("Check Registred Data")
     def check_registred_data(self, value):
         browser.element(".table-responsive").should(have.text(value))
         return self
 
+    @allure.step("Check First Name Error")
     def validation_first_name(self):
         self.first_name.should(
             have.css_property("border-color", value="rgb(220, 53, 69)")
         )
 
+    @allure.step("Check Last Name Error")
     def validation_last_name(self):
         self.last_name.should(
             have.css_property("border-color", value="rgb(220, 53, 69)")
         )
 
+    @allure.step("Check Gender Error")
     def validation_gender(self):
         self.gender_radio.should(
             have.css_property("color", value="rgba(220, 53, 69, 1)")
         )
 
+    @allure.step("Check Validation Phone Number Error")
     def validation_phone(self):
         self.user_number.should(
             have.css_property("border-color", value="rgb(220, 53, 69)")
         )
 
+    @allure.step("Check Validation Email Error")
     def validation_email(self):
         self.email.should(have.css_property("border-color", value="rgb(220, 53, 69)"))
