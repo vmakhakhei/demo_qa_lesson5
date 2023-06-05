@@ -133,7 +133,7 @@ class RegistrationPage:
         return self
 
     def upload_avatar(self, name_picture):
-        self.upload_picture_element.send_keys(f"{os.getcwd()}/resources/{name_picture}")
+        self.upload_picture_element.send_keys(f"{os.getcwd()}/tests/resources/{name_picture}")
         return self
 
     def select_subjects(self, subjects):
